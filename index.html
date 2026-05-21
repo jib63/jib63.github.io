@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jean-Baptiste Meyer — Developer & Photographer</title>
+  <meta name="description" content="Software engineer and photographer based in Strasbourg, France.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #090d14;
+      --surface:    #0f1724;
+      --surface2:   #161f30;
+      --border:     #1d2b40;
+      --text:       #e4e8f0;
+      --muted:      #7a8599;
+      --accent:     #4f8ef7;
+      --purple:     #a78bfa;
+      --amber:      #f59e0b;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* ─── HERO ─────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 5rem 2rem 4rem;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(79,142,247,.18) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(167,139,250,.1) 0%, transparent 60%),
+        var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* subtle dot-grid overlay */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+    }
+
+    .avatar-wrap {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 1.75rem;
+    }
+
+    .avatar-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      background: linear-gradient(135deg, var(--accent), var(--purple)) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out;
+      mask-composite: exclude;
+      animation: spin 8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .avatar {
+      display: block;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 700;
+      letter-spacing: -.03em;
+      line-height: 1.1;
+    }
+
+    .hero h1 .gradient {
+      background: linear-gradient(120deg, var(--accent) 0%, var(--purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .tagline {
+      margin: .9rem 0 2.25rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .links {
+      display: flex;
+      gap: .75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .6rem 1.3rem;
+      border-radius: 50px;
+      font-size: .875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all .2s;
+      white-space: nowrap;
+    }
+
+    .btn-ghost {
+      background: var(--surface2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    .btn-linkedin {
+      background: #0a66c2;
+      color: #fff;
+      border: 1px solid transparent;
+    }
+    .btn-linkedin:hover { background: #0854a0; }
+
+    .btn-amber {
+      background: transparent;
+      color: var(--amber);
+      border: 1px solid rgba(245,158,11,.35);
+    }
+    .btn-amber:hover { background: rgba(245,158,11,.08); border-color: var(--amber); }
+
+    /* ─── LAYOUT ────────────────────────────────────────────── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .eyebrow {
+      font-size: .75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      color: var(--accent);
+      margin-bottom: .6rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -.025em;
+      margin-bottom: 2.75rem;
+    }
+
+    /* ─── PROJECT CARDS ─────────────────────────────────────── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform .22s, box-shadow .22s, border-color .22s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 24px 48px rgba(0,0,0,.45);
+      border-color: rgba(79,142,247,.5);
+    }
+
+    /* card media: either image or icon-panel */
+    .card-media {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-icon-panel {
+      width: 100%;
+      height: 210px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-icon-panel.tram {
+      background: linear-gradient(135deg, #062340 0%, #0c3a5a 50%, #0a4f72 100%);
+    }
+
+    .card-icon-panel.lang {
+      background: linear-gradient(135deg, #130530 0%, #1e0d4a 50%, #2a1060 100%);
+    }
+
+    .tram-display {
+      border: 2px solid rgba(79,142,247,.6);
+      border-radius: 10px;
+      padding: 1.2rem 1.8rem;
+      text-align: center;
+      background: rgba(0,0,0,.4);
+    }
+
+    .tram-display .stop-name {
+      font-size: .7rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .6rem;
+    }
+
+    .tram-row {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      margin: .35rem 0;
+    }
+
+    .tram-badge {
+      font-size: .75rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      padding: .2rem .55rem;
+      border-radius: 5px;
+      min-width: 32px;
+      text-align: center;
+    }
+    .tram-badge.a { background: #e63b3b; color: #fff; }
+    .tram-badge.b { background: #4f8ef7; color: #fff; }
+
+    .tram-dest { font-size: .85rem; color: var(--text); flex: 1; }
+    .tram-time { font-family: 'JetBrains Mono', monospace; font-size: .85rem; color: var(--amber); }
+
+    /* JibL code panel */
+    .code-panel {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem;
+      line-height: 1.7;
+      text-align: left;
+      padding: 1.2rem 1.6rem;
+      background: rgba(0,0,0,.35);
+      border: 1px solid rgba(167,139,250,.25);
+      border-radius: 10px;
+    }
+
+    .kw    { color: #a78bfa; }
+    .fn    { color: #60d1fa; }
+    .str   { color: #86efac; }
+    .cm    { color: #4a5568; }
+    .num   { color: #f9a8d4; }
+
+    /* card body */
+    .card-body {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: .5rem;
+      margin-bottom: .65rem;
+    }
+
+    .card-title { font-size: 1.15rem; font-weight: 600; }
+
+    .card-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 1rem;
+      line-height: 1;
+      padding: .25rem;
+      border-radius: 6px;
+      transition: color .2s, background .2s;
+      flex-shrink: 0;
+    }
+    .card-link:hover { color: var(--accent); background: rgba(79,142,247,.1); }
+
+    .card-desc {
+      color: var(--muted);
+      font-size: .9rem;
+      flex: 1;
+      margin-bottom: 1.2rem;
+    }
+
+    .tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+
+    .tag {
+      padding: .2rem .65rem;
+      border-radius: 50px;
+      font-size: .72rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+      background: var(--surface2);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    /* ─── PHOTOGRAPHY ───────────────────────────────────────── */
+    .photo-belt {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .photo-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .photo-text .section-title { margin-bottom: 1rem; }
+
+    .photo-text p {
+      color: var(--muted);
+      margin-bottom: 2rem;
+      line-height: 1.75;
+    }
+
+    .btn-visit {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .75rem 1.6rem;
+      background: var(--amber);
+      color: #000;
+      font-weight: 600;
+      font-size: .9rem;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: all .2s;
+    }
+    .btn-visit:hover { background: #e08d00; transform: translateY(-2px); }
+
+    .mosaic {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 6px;
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 1 / .9;
+    }
+
+    .mosaic-item {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .mosaic-item:first-child {
+      grid-column: 1 / -1;
+    }
+
+    .mosaic-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .4s ease;
+      filter: brightness(.85) saturate(1.1);
+    }
+
+    .mosaic-item:hover img { transform: scale(1.06); filter: brightness(1) saturate(1.2); }
+
+    /* placeholder tiles when no real photo available */
+    .mosaic-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+
+    @media (max-width: 720px) {
+      .photo-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .mosaic { max-width: 420px; }
+    }
+
+    /* ─── FOOTER ────────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: .82rem;
+      border-top: 1px solid var(--border);
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ─── ABOUT ─────────────────────────────────────────────── */
+    .about-belt {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .about-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      align-content: flex-start;
+    }
+
+    .pill {
+      padding: .35rem .85rem;
+      border-radius: 50px;
+      font-size: .8rem;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text);
+    }
+
+    .pill.accent  { border-color: rgba(79,142,247,.4);  color: var(--accent);  background: rgba(79,142,247,.07); }
+    .pill.purple  { border-color: rgba(167,139,250,.4); color: var(--purple);  background: rgba(167,139,250,.07); }
+    .pill.amber   { border-color: rgba(245,158,11,.4);  color: var(--amber);   background: rgba(245,158,11,.07); }
+
+    @media (max-width: 720px) {
+      .about-inner { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    /* ─── PHOTOGRAPHY LINKS ─────────────────────────────────── */
+    .photo-links {
+      display: flex;
+      gap: .75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-500px {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .75rem 1.6rem;
+      background: transparent;
+      color: var(--text);
+      font-weight: 600;
+      font-size: .9rem;
+      text-decoration: none;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      transition: all .2s;
+    }
+    .btn-500px:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    /* ─── SVG ICONS ─────────────────────────────────────────── */
+    .icon { display: inline-block; vertical-align: middle; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ HERO ══ -->
+<header class="hero">
+  <div class="avatar-wrap">
+    <img class="avatar"
+         src="https://avatars.githubusercontent.com/u/29891501?v=4"
+         alt="Jean-Baptiste Meyer">
+  </div>
+
+  <h1>Jean-Baptiste <span class="gradient">Meyer</span></h1>
+  <p class="tagline">Software Engineer &amp; Photographer · Strasbourg, France</p>
+
+  <nav class="links">
+    <a href="https://github.com/jib63" class="btn btn-ghost" target="_blank" rel="noopener">
+      <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+      </svg>
+      GitHub
+    </a>
+    <a href="https://www.linkedin.com/in/jbmeyer63" class="btn btn-linkedin" target="_blank" rel="noopener">
+      <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+      </svg>
+      LinkedIn
+    </a>
+    <a href="https://www.jibstudios.com" class="btn btn-amber" target="_blank" rel="noopener">
+      <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+        <circle cx="12" cy="13" r="4"/>
+      </svg>
+      Photography
+    </a>
+  </nav>
+</header>
+
+<!-- ════════════════════════════════════════════ ABOUT ══ -->
+<section class="about-belt">
+  <div class="about-inner">
+    <div class="about-text">
+      <p class="eyebrow">About</p>
+      <h2 class="section-title">Software Architect</h2>
+      <p>
+        I design and build complex software systems at <strong style="color:var(--text)">Merck Group</strong> in Molsheim, with a focus on healthcare IT — patient radiation dose monitoring, medical imaging pipelines, and hospital interoperability (HL7, DICOM).
+      </p>
+      <p>
+        A significant part of my work sits at the intersection of industrial IT and security: I'm specialized in <strong style="color:var(--text)">IEC 62443</strong> (industrial cybersecurity), the EU <strong style="color:var(--text)">Cyber Resilience Act (CRA)</strong>, and the security requirements that govern connected medical and industrial systems.
+      </p>
+      <p>
+        I hold two patents in radiation dose mapping for angiography imaging systems, and I graduated from ISIMA Clermont-Ferrand (2006).
+      </p>
+    </div>
+    <div class="about-pills">
+      <span class="pill accent">Software Architecture</span>
+      <span class="pill accent">Java / Rust / C</span>
+      <span class="pill accent">Healthcare IT</span>
+      <span class="pill purple">IEC 62443</span>
+      <span class="pill purple">Cyber Resilience Act</span>
+      <span class="pill purple">Cybersecurity</span>
+      <span class="pill">HL7 / DICOM</span>
+      <span class="pill">Interoperability</span>
+      <span class="pill">Medical Imaging</span>
+      <span class="pill amber">Patents × 2</span>
+      <span class="pill">Industrial Standards</span>
+      <span class="pill">System Integration</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ PROJECTS ══ -->
+<main>
+  <div class="container">
+    <p class="eyebrow">Open Source</p>
+    <h2 class="section-title">Projects</h2>
+
+    <div class="grid">
+
+      <!-- ── CTS Departure ─────────────────────────── -->
+      <article class="card">
+        <div class="card-icon-panel tram">
+          <div class="tram-display">
+            <div class="stop-name">Homme de Fer · Direction</div>
+            <div class="tram-row">
+              <span class="tram-badge a">A</span>
+              <span class="tram-dest">Illkirch Lixenbuhl</span>
+              <span class="tram-time">2 mn</span>
+            </div>
+            <div class="tram-row">
+              <span class="tram-badge b">B</span>
+              <span class="tram-dest">Lingolsheim Tiergarten</span>
+              <span class="tram-time">5 mn</span>
+            </div>
+            <div class="tram-row">
+              <span class="tram-badge a">A</span>
+              <span class="tram-dest">Illkirch Lixenbuhl</span>
+              <span class="tram-time">9 mn</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-header">
+            <h3 class="card-title">CTS Departure</h3>
+            <a href="https://github.com/jib63/CTS_destination" class="card-link"
+               target="_blank" rel="noopener" aria-label="View on GitHub">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </a>
+          </div>
+          <p class="card-desc">
+            Real-time departure board for the Strasbourg tram network (CTS SIRI 2.0 API). Live WebSocket updates, multi-stop rotation, weather overlay, and Divoom Pixoo64 LED matrix output — all in a single self-contained binary.
+          </p>
+          <div class="tags">
+            <span class="tag">Rust</span>
+            <span class="tag">WebSocket</span>
+            <span class="tag">HTML / JS</span>
+            <span class="tag">LED Matrix</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ── Reliquum ──────────────────────────────── -->
+      <article class="card">
+        <img class="card-media"
+             src="https://jib63.github.io/Reliquum-support/en/img/01-vault-populated.png"
+             alt="Reliquum vault screenshot">
+        <div class="card-body">
+          <div class="card-header">
+            <h3 class="card-title">Reliquum</h3>
+            <a href="https://jib63.github.io/Reliquum-support/" class="card-link"
+               target="_blank" rel="noopener" aria-label="Visit support page">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </a>
+          </div>
+          <p class="card-desc">
+            An iOS vault for letters across time. Compose encrypted messages — text, voice, or photos — that unlock only on a chosen date or at a specific location. Hardware-backed keys, Face ID, fully offline with no account or server required.
+          </p>
+          <div class="tags">
+            <span class="tag">iOS</span>
+            <span class="tag">Encryption</span>
+            <span class="tag">Privacy-First</span>
+            <span class="tag">Location</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ── JibL ──────────────────────────────────── -->
+      <article class="card">
+        <div class="card-icon-panel lang">
+          <div class="code-panel">
+            <div><span class="cm">-- trilingual · AI-native</span></div>
+            <div><span class="kw">@ai</span></div>
+            <div><span class="kw">fonction</span> <span class="fn">résoudre</span>(n: <span class="kw">entier</span>) → <span class="kw">résultat</span>&lt;<span class="kw">entier</span>, <span class="kw">erreur</span>&gt;</div>
+            <div>&nbsp;&nbsp;<span class="kw">requiert</span> n &gt; <span class="num">0</span></div>
+            <div><span class="kw">fin</span></div>
+            <br>
+            <div><span class="kw">function</span> <span class="fn">greet</span>(name: <span class="kw">string</span>) → <span class="kw">string</span></div>
+            <div>&nbsp;&nbsp;<span class="kw">ask</span>(<span class="str">"say hello to {name}"</span>)</div>
+            <div><span class="kw">end</span></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-header">
+            <h3 class="card-title">JibL</h3>
+            <a href="https://github.com/jib63/JibL" class="card-link"
+               target="_blank" rel="noopener" aria-label="View on GitHub">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </a>
+          </div>
+          <p class="card-desc">
+            A strongly-typed, strictly procedural, AI-native programming language with trilingual keywords — English, Français, and Español. Compiles to S-expression IR on a minimal C runtime. The <code style="font-family:'JetBrains Mono',monospace;color:var(--purple)">@ai</code> decorator generates function bodies via LLM at compile time.
+          </p>
+          <div class="tags">
+            <span class="tag">C</span>
+            <span class="tag">Language Design</span>
+            <span class="tag">AI-Native</span>
+            <span class="tag">EN / FR / ES</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</main>
+
+<!-- ══════════════════════════════════════ PHOTOGRAPHY ══ -->
+<section class="photo-belt">
+  <div class="photo-inner">
+    <div class="photo-text">
+      <p class="eyebrow">Creative</p>
+      <h2 class="section-title">Photography</h2>
+      <p>Beyond code, I explore the world through a lens — from architecture and street scenes in Strasbourg to landscapes and portrait work. Available as fine-art prints.</p>
+      <div class="photo-links">
+        <a href="https://www.jibstudios.com" class="btn-visit" target="_blank" rel="noopener">
+          <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+            <circle cx="12" cy="13" r="4"/>
+          </svg>
+          JibStudios
+        </a>
+        <a href="https://500px.com/p/jibstudios" class="btn-500px" target="_blank" rel="noopener">
+          <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8.503 10.76c-.51 0-.863.37-.863.886 0 .51.354.88.863.88s.864-.37.864-.88c0-.516-.355-.886-.864-.886zm5.24 1.575c0 .73-.51 1.26-1.248 1.26-.74 0-1.25-.53-1.25-1.26 0-.73.51-1.26 1.25-1.26.738 0 1.248.53 1.248 1.26zm-3.498 0c0 .73-.51 1.26-1.248 1.26-.74 0-1.25-.53-1.25-1.26 0-.73.51-1.26 1.25-1.26.738 0 1.248.53 1.248 1.26zM12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 18.5c-3.59 0-6.5-2.91-6.5-6.5S8.41 5.5 12 5.5s6.5 2.91 6.5 6.5-2.91 6.5-6.5 6.5z"/>
+          </svg>
+          500px
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ FOOTER ══ -->
+<footer>
+  <p>
+    © 2026 Jean-Baptiste Meyer ·
+    <a href="https://github.com/jib63" target="_blank" rel="noopener">GitHub</a> ·
+    <a href="https://www.linkedin.com/in/jbmeyer63" target="_blank" rel="noopener">LinkedIn</a> ·
+    <a href="https://www.jibstudios.com" target="_blank" rel="noopener">JibStudios</a> ·
+    <a href="https://500px.com/p/jibstudios" target="_blank" rel="noopener">500px</a>
+  </p>
+</footer>
+
+</body>
+</html>
