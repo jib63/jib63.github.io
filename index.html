@@ -275,6 +275,126 @@
     .cm    { color: #4a5568; }
     .num   { color: #f9a8d4; }
 
+    /* ─── iOS SECTION ───────────────────────────────────── */
+    .ios-belt {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+
+    .ios-belt .card:hover { border-color: rgba(167,139,250,.5); }
+
+    /* Reliquum capsule panel */
+    .card-icon-panel.reliquum {
+      background: linear-gradient(135deg, #0d0520 0%, #180840 50%, #220d50 100%);
+    }
+
+    .capsule-display {
+      border: 1px solid rgba(167,139,250,.35);
+      border-radius: 14px;
+      padding: 1.1rem 1.8rem;
+      text-align: center;
+      background: rgba(0,0,0,.45);
+    }
+
+    .capsule-label {
+      font-size: .65rem;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: var(--purple);
+      opacity: .8;
+      margin-bottom: .45rem;
+    }
+
+    .capsule-lock {
+      display: block;
+      margin: 0 auto .45rem;
+      color: var(--purple);
+      opacity: .75;
+    }
+
+    .capsule-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1rem;
+      color: var(--text);
+      font-weight: 600;
+      margin-bottom: .2rem;
+    }
+
+    .capsule-sep {
+      font-size: .7rem;
+      color: var(--muted);
+      margin: .25rem 0;
+    }
+
+    .capsule-loc {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .35rem;
+      font-size: .78rem;
+      color: var(--purple);
+      opacity: .7;
+    }
+
+    /* MySoundLibrary waveform panel */
+    .card-icon-panel.sound {
+      background: linear-gradient(135deg, #031812 0%, #062d1e 50%, #093a28 100%);
+    }
+
+    .wave-display { text-align: center; }
+
+    .wave-label {
+      font-size: .65rem;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: #34d399;
+      opacity: .8;
+      margin-bottom: .85rem;
+    }
+
+    .wave-bars {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 4px;
+      height: 56px;
+      margin-bottom: .85rem;
+    }
+
+    .wave-bars span {
+      display: inline-block;
+      width: 5px;
+      border-radius: 3px;
+      background: #34d399;
+      opacity: .75;
+    }
+
+    .wave-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .45rem;
+      font-size: .78rem;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .wave-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #34d399;
+      flex-shrink: 0;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: .3; transform: scale(.8); }
+      50%       { opacity: 1; transform: scale(1.1); }
+    }
+
+    .eyebrow.purple { color: var(--purple); }
+
     /* card body */
     .card-body {
       padding: 1.5rem;
@@ -619,33 +739,6 @@
         </div>
       </article>
 
-      <!-- ── Reliquum ──────────────────────────────── -->
-      <article class="card">
-        <img class="card-media"
-             src="https://jib63.github.io/Reliquum-support/en/img/01-vault-populated.png"
-             alt="Reliquum vault screenshot">
-        <div class="card-body">
-          <div class="card-header">
-            <h3 class="card-title">Reliquum</h3>
-            <a href="https://jib63.github.io/Reliquum-support/" class="card-link"
-               target="_blank" rel="noopener" aria-label="Visit support page">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
-              </svg>
-            </a>
-          </div>
-          <p class="card-desc">
-            An iOS vault for letters across time. Compose encrypted messages — text, voice, or photos — that unlock only on a chosen date or at a specific location. Hardware-backed keys, Face ID, fully offline with no account or server required.
-          </p>
-          <div class="tags">
-            <span class="tag">iOS</span>
-            <span class="tag">Encryption</span>
-            <span class="tag">Privacy-First</span>
-            <span class="tag">Location</span>
-          </div>
-        </div>
-      </article>
-
       <!-- ── JibL ──────────────────────────────────── -->
       <article class="card">
         <div class="card-icon-panel lang">
@@ -686,6 +779,114 @@
     </div>
   </div>
 </main>
+
+<!-- ═══════════════════════════════════════ iOS APPS ══ -->
+<section class="ios-belt">
+  <div class="container">
+    <p class="eyebrow purple">iOS Apps</p>
+    <h2 class="section-title">iOS Projects</h2>
+
+    <div class="grid">
+
+      <!-- ── Reliquum ──────────────────────────────── -->
+      <article class="card">
+        <div class="card-icon-panel reliquum">
+          <div class="capsule-display">
+            <div class="capsule-label">Time Capsule</div>
+            <svg class="capsule-lock" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            <div class="capsule-date">Jun 12 · 2027</div>
+            <div class="capsule-sep">— or —</div>
+            <div class="capsule-loc">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+              </svg>
+              Place Kléber, Strasbourg
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-header">
+            <h3 class="card-title">Reliquum</h3>
+            <a href="https://jib63.github.io/Reliquum-support/" class="card-link"
+               target="_blank" rel="noopener" aria-label="Visit support page">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </a>
+          </div>
+          <p class="card-desc">
+            An iOS vault for letters across time. Compose encrypted messages — text, voice notes, or photos — that unlock only on a chosen date or when you reach a specific location. Share sealed capsules via iMessage, AirDrop, or Mail using short codes. Hardware-backed keys, Face ID, fully offline — no account or server required.
+          </p>
+          <div class="tags">
+            <span class="tag">iOS</span>
+            <span class="tag">Encryption</span>
+            <span class="tag">Cross-Device</span>
+            <span class="tag">Location</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ── MySoundLibrary ─────────────────────────── -->
+      <article class="card">
+        <div class="card-icon-panel sound">
+          <div class="wave-display">
+            <div class="wave-label">Sound Recording</div>
+            <div class="wave-bars">
+              <span style="height:16px"></span>
+              <span style="height:24px"></span>
+              <span style="height:38px"></span>
+              <span style="height:48px"></span>
+              <span style="height:54px"></span>
+              <span style="height:42px"></span>
+              <span style="height:30px"></span>
+              <span style="height:50px"></span>
+              <span style="height:40px"></span>
+              <span style="height:26px"></span>
+              <span style="height:46px"></span>
+              <span style="height:32px"></span>
+              <span style="height:18px"></span>
+              <span style="height:28px"></span>
+              <span style="height:42px"></span>
+              <span style="height:32px"></span>
+              <span style="height:22px"></span>
+              <span style="height:44px"></span>
+              <span style="height:26px"></span>
+              <span style="height:14px"></span>
+            </div>
+            <div class="wave-meta">
+              <div class="wave-dot"></div>
+              GPS · iCloud · Acoustic Trail
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-header">
+            <h3 class="card-title">MySoundLibrary</h3>
+            <a href="https://jib63.github.io/MySoundLibrary-support/en/" class="card-link"
+               target="_blank" rel="noopener" aria-label="Visit support page">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </a>
+          </div>
+          <p class="card-desc">
+            A personal audio archive for capturing the sounds of places you've been. Record ambient audio with one tap — geotagged, timestamped, and optionally photographed. Explore memories on the Acoustic Trail map, receive Sound Anniversary reminders each year, and share Sound Postcards as audio bundles or videos. Free up to 10 recordings; unlimited with a one-time purchase.
+          </p>
+          <div class="tags">
+            <span class="tag">iOS</span>
+            <span class="tag">Audio</span>
+            <span class="tag">GPS / Maps</span>
+            <span class="tag">iCloud</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
 
 <!-- ══════════════════════════════════════ PHOTOGRAPHY ══ -->
 <section class="photo-belt">
