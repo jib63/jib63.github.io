@@ -35,5 +35,6 @@ All colors are CSS custom properties on `:root` in `index.html`:
 
 - **Hero** — GitHub avatar (`avatars.githubusercontent.com/u/29891501`), name, tagline, social buttons (GitHub / LinkedIn / Photography)
 - **Projects grid** — 3 cards: CTS Departure (`jib63/CTS_destination`), Reliquum (`jib63.github.io/Reliquum-support/`), JibL (`jib63/JibL`)
+- **iOS Apps belt** — 3 cards linking to each app's support landing: Reliquum (`jib63.github.io/Reliquum-support/`), MySoundLibrary (`jib63.github.io/MySoundLibrary-support/en/`), Rekko (`jib63.github.io/Rekko-support/`). Each card has a hand-rolled visual panel (`.card-icon-panel.{reliquum,sound,rekko}`) — keep them in sync if a new app lands.
 - **Photography belt** — links to `https://www.jibstudios.com`; the mosaic currently uses Reliquum support screenshots as placeholders — replace `src` attributes with real photo URLs when available
 - **Footer** — GitHub, LinkedIn (`linkedin.com/in/jbmeyer63`), JibStudios links

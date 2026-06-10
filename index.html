@@ -393,6 +393,81 @@
       50%       { opacity: 1; transform: scale(1.1); }
     }
 
+    /* Rekko circle-feed panel */
+    .card-icon-panel.rekko {
+      background: linear-gradient(135deg, #1a1238 0%, #2a1856 50%, #3d1f7e 100%);
+    }
+
+    .rekko-display {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .85rem;
+    }
+
+    .rekko-label {
+      font-size: .65rem;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: #c4b5fd;
+      opacity: .85;
+    }
+
+    .rekko-avatars {
+      display: flex;
+      align-items: center;
+    }
+
+    .rekko-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .78rem;
+      font-weight: 700;
+      color: #fff;
+      border: 2px solid #1a1238;
+      margin-left: -8px;
+      letter-spacing: 0;
+    }
+    .rekko-avatar:first-child { margin-left: 0; }
+    .rekko-avatar.a1 { background: linear-gradient(135deg, #9b59ff, #6b21a8); }
+    .rekko-avatar.a2 { background: linear-gradient(135deg, #ec4899, #be185d); }
+    .rekko-avatar.a3 { background: linear-gradient(135deg, #f59e0b, #b45309); }
+    .rekko-avatar.a4 { background: linear-gradient(135deg, #10b981, #047857); }
+
+    .rekko-reco {
+      border: 1px solid rgba(155, 89, 255, .35);
+      border-radius: 10px;
+      background: rgba(0, 0, 0, .45);
+      padding: .55rem .85rem;
+      min-width: 195px;
+      text-align: left;
+    }
+
+    .rekko-reco-from {
+      font-size: .68rem;
+      color: var(--muted);
+      margin-bottom: .15rem;
+    }
+    .rekko-reco-from b { color: #c4b5fd; font-weight: 700; }
+
+    .rekko-reco-title {
+      font-size: .92rem;
+      color: var(--text);
+      font-weight: 600;
+      margin-bottom: .2rem;
+    }
+
+    .rekko-reco-stars {
+      font-size: .68rem;
+      color: #f59e0b;
+      letter-spacing: .05em;
+    }
+    .rekko-reco-stars .dim { color: rgba(245, 158, 11, .25); }
+
     .eyebrow.purple { color: var(--purple); }
 
     /* card body */
@@ -880,6 +955,46 @@
             <span class="tag">Audio</span>
             <span class="tag">GPS / Maps</span>
             <span class="tag">iCloud</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ── Rekko ──────────────────────────────────── -->
+      <article class="card">
+        <div class="card-icon-panel rekko">
+          <div class="rekko-display">
+            <div class="rekko-label">Private Circle</div>
+            <div class="rekko-avatars">
+              <div class="rekko-avatar a1">J</div>
+              <div class="rekko-avatar a2">P</div>
+              <div class="rekko-avatar a3">L</div>
+              <div class="rekko-avatar a4">M</div>
+            </div>
+            <div class="rekko-reco">
+              <div class="rekko-reco-from"><b>Paul</b> recommends</div>
+              <div class="rekko-reco-title">The Bear</div>
+              <div class="rekko-reco-stars">★ ★ ★ ★ <span class="dim">★</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-header">
+            <h3 class="card-title">Rekko</h3>
+            <a href="https://jib63.github.io/Rekko-support/" class="card-link"
+               target="_blank" rel="noopener" aria-label="Visit support page">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </a>
+          </div>
+          <p class="card-desc">
+            The private, ad-free way to swap TV and movie recommendations with the people you actually watch with. Create circles for family, friends or colleagues, send shows with a one-line note, and see what your circle is really rating — no public feed, no algorithm, no third-party trackers. Built on Sign in with Apple, iCloud (CloudKit) and App Attest, with full RGPD export + one-tap account deletion.
+          </p>
+          <div class="tags">
+            <span class="tag">iOS</span>
+            <span class="tag">CloudKit</span>
+            <span class="tag">Sharing</span>
+            <span class="tag">Privacy</span>
           </div>
         </div>
       </article>
